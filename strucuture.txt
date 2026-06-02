@@ -1,0 +1,53 @@
+cryptoscope/
+│
+├── backend/                             # Python FastAPI Application
+│   │
+│   ├── core/                            # Cryptographic Primitives (Math)
+│   │   ├── __init__.py
+│   │   ├── math_utils.py                # Miller-Rabin, EEA, Square-and-Multiply
+│   │   └── rsa_core.py                  # Textbook RSA Keygen, Encrypt, Decrypt
+│   │
+│   ├── services/                        # Business Logic & Core Routines
+│   │   ├── __init__.py
+│   │   ├── attack_engine.py             # Fermat's Factorization & Attacks
+│   │   └── benchmark_engine.py          # Timing loops, Panda metrics, OS jitter filter
+│   │
+│   ├── api/                             # API Endpoint Routing
+│   │   ├── __init__.py
+│   │   ├── router_rsa.py                # Endpoints for RSA operations
+│   │   ├── router_attacks.py            # Endpoints for Attack simulation
+│   │   └── router_benchmarks.py         # Endpoints for Performance metrics
+│   │
+│   ├── models/                          # Pydantic schemas for request/response
+│   │   └── schemas.py
+│   │
+│   ├── main.py                          # FastAPI Entrypoint & CORS setup
+│   ├── demo.py                          # Phase 1 CLI testing script
+│   └── requirements.txt                 # fastapi, uvicorn, pydantic, numpy, pandas
+│
+└── frontend/                            # React + TypeScript Client
+    ├── public/
+    ├── src/
+    │   ├── assets/                      # Global styles or simple icons
+    │   ├── components/                  # Reusable Academic UI Primitives
+    │   │   ├── KeyValueGrid.tsx         # Displays large ints cleanly
+    │   │   ├── MathBlock.tsx            # LaTeX rendering wrapper
+    │   │   └── PerformanceChart.tsx     # Recharts engine for metrics
+    │   │
+    │   ├── pages/                       # Module Workspace Views
+    │   │   ├── Dashboard.tsx            # Overview & System Architecture map
+    │   │   ├── RsaExplorer.tsx          # Step-by-step math interactive sandbox
+    │   │   ├── AttackSimulator.tsx      # Brute-force/Fermat factorizer interface
+    │   │   └── PerformanceResearch.tsx  # Dynamic plotting & analysis logs
+    │   │
+    │   ├── services/                    # API Integration Layer
+    │   │   └── api.ts                   # Centralized Axios setup
+    │   │
+    │   ├── App.tsx                      # Layout assembly & Routing
+    │   ├── main.tsx
+    │   └── index.css                    # Tailwind CSS imports
+    │
+    ├── index.html
+    ├── tailwind.config.js
+    ├── tsconfig.json
+    └── package.json
