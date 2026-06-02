@@ -1,6 +1,6 @@
 import time
 from typing import List, Dict, Any
-from ..core.rsa_core import TextbookRSA
+from core.rsa_core import TextbookRSA
 
 class PerformanceProfiler:
     """
