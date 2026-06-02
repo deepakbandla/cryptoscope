@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react
 import { Shield, Target, Activity, Cpu } from 'lucide-react';
 import RsaExplorer from './pages/RsaExplorer';
 import AttackSimulator from './pages/AttackSimulator';
+import PerformanceResearch from './pages/PerformanceResearch';
 
 const Sidebar = () => {
     const location = useLocation();
@@ -47,6 +48,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<RsaExplorer />} />
                         <Route path="/attacks" element={<AttackSimulator />} />
+                        <Route path="/benchmarks" element={<PerformanceResearch />} />
                     </Routes>
                 </main>
             </div>

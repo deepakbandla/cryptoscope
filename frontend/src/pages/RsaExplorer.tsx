@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { apiClient } from '../services/api';
+import MathBlock from '../components/MathBlock';
+import KeyValueGrid from '../components/KeyValueGrid';
 
 export default function RsaExplorer() {
     const [bitSize, setBitSize] = useState(256);
@@ -23,7 +25,7 @@ export default function RsaExplorer() {
             <p className="text-zinc-400 mb-8">Generate textbook RSA parameters and inspect the modular arithmetic variables.</p>
 
             <div className="bg-zinc-850 border border-zinc-800 rounded-lg p-6 mb-8">
-                <div className="flex items-end gap-4 mb-6">
+                <div className="flex items-end gap-4 mb-8 border-b border-zinc-800 pb-6">
                     <div>
                         <label className="block text-sm font-medium text-zinc-400 mb-1">Key Bit Size</label>
                         <select
@@ -45,20 +47,30 @@ export default function RsaExplorer() {
                     </button>
                 </div>
 
-                {keys && (
+                {keys ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="bg-zinc-900 p-4 rounded border border-zinc-800">
-                            <span className="text-xs text-zinc-500 uppercase tracking-wider">Public Modulus (n)</span>
-                            <p className="text-zinc-300 font-mono text-sm mt-1 break-all">{keys.n}</p>
-                        </div>
-                        <div className="bg-zinc-900 p-4 rounded border border-zinc-800">
-                            <span className="text-xs text-zinc-500 uppercase tracking-wider">Public Exponent (e)</span>
-                            <p className="text-zinc-300 font-mono text-sm mt-1">{keys.e}</p>
-                        </div>
-                        <div className="bg-zinc-900 p-4 rounded border border-zinc-800 md:col-span-2">
-                            <span className="text-xs text-red-400 uppercase tracking-wider">Private Exponent (d) - SECRET</span>
-                            <p className="text-zinc-300 font-mono text-sm mt-1 break-all">{keys.d}</p>
-                        </div>
+                        <KeyValueGrid
+                            label="Public Modulus"
+                            mathEquation="n = p \times q"
+                            value={keys.n}
+                        />
+                        <KeyValueGrid
+                            label="Public Exponent"
+                            mathEquation="e"
+                            value={keys.e}
+                        />
+                        <KeyValueGrid
+                            label="Private Exponent"
+                            mathEquation="d \equiv e^{-1} \pmod{\phi(n)}"
+                            value={keys.d}
+                            isSecret={true}
+                            fullWidth={true}
+                        />
+                    </div>
+                ) : (
+                    <div className="text-center py-10">
+                        <MathBlock math="c \equiv m^e \pmod{n}" />
+                        <p className="text-zinc-600 mt-4">Awaiting key generation...</p>
                     </div>
                 )}
             </div>
