@@ -12,7 +12,6 @@ def square_and_multiply(base: int,exponent: int, modulus: int) ->int:
     result =1
     base = base %modulus
     
-    # Process exponent bit by bit (from LSB to MSB)
     while exponent > 0:
         # if the least significant bit is 1,multiply
         if (exponent & 1)== 1:
@@ -34,7 +33,6 @@ def miller_rabin(n: int, k: int = 40) -> bool:
     if n <= 1 or n % 2 == 0:
         return False
 
-    # Find r and d such that n - 1 = 2^r * d
     r, d = 0, n - 1
     while d % 2 == 0:
         r += 1
@@ -44,10 +42,8 @@ def miller_rabin(n: int, k: int = 40) -> bool:
     for _ in range(k):
         a = random.randrange(2, n - 1)
         x = square_and_multiply(a, d, n)
-        
         if x == 1 or x == n - 1:
             continue
-            
         for _ in range(r - 1):
             x = square_and_multiply(x, 2, n)
             if x == n - 1:
